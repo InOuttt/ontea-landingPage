@@ -1,8 +1,8 @@
 # Ontea — Thai Tea Menu (Static Landing Page)
 
-A single-page, mobile-first menu site for **Ontea**. Customers browse drinks and pre-order via WhatsApp. Delivery is limited to a 30km radius (listed as named neighborhoods).
+A single-page, mobile-first menu site for **Ontea**. Customers browse drinks and pre-order via WhatsApp. Delivery is limited to a listed set of neighborhoods.
 
-No build step. Open `index.html` in a browser, or drop the folder onto Netlify / Cloudflare Pages / GitHub Pages.
+No build step. Open `index.html` in a browser.
 
 ## Files
 
@@ -15,16 +15,6 @@ assets/js/main.js          Renders menu, filters, WhatsApp links
 assets/img/                Drink photos (optional)
 README.md                  This file
 ```
-
-## Before you go live
-
-1. Open [`assets/js/config.js`](assets/js/config.js) and replace every `TODO` value:
-   - `whatsappNumber` — digits only, international format (e.g. `6281234567890`)
-   - `address`, `mapsUrl`, `phoneDisplay`
-   - `hours`, `preorder` cutoff / lead time / delivery days
-   - `delivery.fee`, `delivery.minimumOrder`, `delivery.areas`
-2. Open [`assets/js/menu-data.js`](assets/js/menu-data.js) and replace the placeholder drinks with your real menu and prices.
-3. Drop photos into `assets/img/` using the same filenames as in `menu-data.js` (or update the `image` paths). Missing images fall back to a colored placeholder.
 
 ## Add a drink
 
@@ -72,24 +62,4 @@ Every “Order this” button and the header CTA open `https://wa.me/<number>?te
 
 ## Change delivery areas
 
-Edit the `delivery.areas` array in `config.js`. Named neighborhoods reassure customers more than a bare “30km” claim.
-
-## Deploy
-
-Any static host works:
-
-- **Netlify / Cloudflare Pages:** drag the project folder into the dashboard, or connect the git repo (publish directory = project root).
-- **GitHub Pages:** push the repo and enable Pages on the root branch.
-- **Local preview:** double-click `index.html`, or from this folder run:
-
-  ```bash
-  python3 -m http.server 8080
-  ```
-
-  then open http://localhost:8080
-
-## Design notes
-
-- Palette lives in CSS custom properties at the top of `styles.css` (`--color-tea`, `--color-cream`, `--color-brown`).
-- Menu grid uses `repeat(auto-fill, minmax(260px, 1fr))` so it reflows without many media queries.
-- Filter buttons use `aria-pressed` for accessibility; images use `loading="lazy"` and alt text from the drink name.
+Edit the `delivery.areas` array in `config.js`. Named neighborhoods reassure customers more than a bare radius claim.
