@@ -270,13 +270,34 @@ button {
   }
 }
 
+/* —— Shared scroll-locked bg (hero + menu only) —— */
+.hero,
+.menu {
+  --section-bg-image: url("../img/all-tea.png");
+  background-color: var(--color-cream);
+  background-image:
+    linear-gradient(
+      rgba(250, 246, 240, 0.78),
+      rgba(250, 246, 240, 0.88)
+    ),
+    var(--section-bg-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
 /* —— Hero —— */
 .hero {
   padding-block: var(--space-3xl) var(--space-2xl);
-  background:
-    radial-gradient(ellipse 80% 60% at 80% 10%, rgba(121, 47, 4, 0.18), transparent 60%),
-    radial-gradient(ellipse 50% 40% at 10% 80%, rgba(216, 107, 6, 0.9), transparent 50%),
-    var(--color-cream);
+}
+
+@media (max-width: 719px) {
+  /* Fixed backgrounds are janky on many mobile browsers */
+  .hero,
+  .menu {
+    background-attachment: scroll;
+  }
 }
 
 .hero-inner {
@@ -713,13 +734,32 @@ button {
 
 .social-links {
   display: flex;
-  gap: var(--space-md);
+  gap: var(--space-sm);
   margin-top: var(--space-md);
 }
 
-.social-links a {
-  font-weight: 600;
+.social-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-full);
+  color: var(--color-brown);
+  background: rgba(61, 43, 31, 0.08);
   text-decoration: none;
+  transition: background var(--transition), color var(--transition), transform var(--transition);
+}
+
+.social-icon:hover {
+  background: var(--color-tea);
+  color: var(--color-white);
+  transform: translateY(-1px);
+}
+
+.social-icon svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  display: block;
 }
 
 .footer-bottom {
