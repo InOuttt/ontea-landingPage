@@ -29,8 +29,8 @@ const MENU = [
     name: "Thai Green Tea",
     description: "Teh hijau yang khas dari Thailand, dengan rasa dan aromah yang istimewa.",
     prices: [
-      { name: "regular", price: 18000 },
-      { name: "1 Liter", price: 70000 },
+      { name: "regular", price: 20000 },
+      { name: "1 Liter", price: 75000 },
     ],
     image: "assets/img/thai-green-tea.jpeg",
     tags: [],
