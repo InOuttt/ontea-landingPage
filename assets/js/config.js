@@ -24,8 +24,8 @@ const CONFIG = {
   ],
 
   preorder: {
-    cutoff: "Maksimum order harus dilakukan sebelum pukul 20:00 WIB H-1 Pemesanan.",
-    leadTime: "Kami akan konfirmasi pesanan melalui WhatsApp, lalu kirimkan pada hari yang Anda pilih.",
+    cutoff: "Pemesanan maksimal H-1 dan pukul 20.00 WIB setiap harinya",
+    leadTime: "Kami akan konfirmasi pesanan melalui WhatsApp, kami akan mengirim pesanan tepat waktu.",
     deliveryDays: "Setiap Hari",
   },
 

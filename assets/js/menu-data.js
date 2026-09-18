@@ -13,7 +13,7 @@ const MENU = [
     id: "classic-thai-tea",
     category: "classic",
     name: "Original Thai Tea",
-    description: "Teh Chatramu yang khas dari Thailand, dengan rasa manis dan gurih yang pas.",
+    description: "Diseduh menggunakan teh asli dari Thailand yang menghasilkan aroma khas. Teh diolah dengan sepenuh hati dan menghasilkan rasa manis, creamy dan wangi.",
     prices: [
       { name: "regular", price: 18000 },
       { name: "1 Liter", price: 70000 },
@@ -27,7 +27,7 @@ const MENU = [
     id: "thai-green-tea",
     category: "green",
     name: "Thai Green Tea",
-    description: "Teh hijau yang khas dari Thailand, dengan rasa dan aromah yang istimewa.",
+    description: "Diseduh menggunakan teh asli dari Thailand yang menghasilkan aroma khas. Teh diolah dengan sepenuh hati dan menghasilkan rasa manis, creamy dan wangi.",
     prices: [
       { name: "regular", price: 20000 },
       { name: "1 Liter", price: 75000 },
@@ -38,9 +38,9 @@ const MENU = [
   },
   {
     id: "roasted-milk-tea",
-    category: "classic",
+    category: "roastedMilkTea",
     name: "Roasted Milk Tea",
-    description: "Roasted Milk Tea dengan rasa manis dan gurih spesial OnTea.",
+    description: "Diseduh menggunakan teh lokal Malang yang menghasilkan aroma khas. Teh diolah dengan sepenuh hati dan menghasilkan rasa manis, creamy dan wangi.",
     prices: [
       { name: "regular", price: 18000 },
       { name: "1 Liter", price: 70000 },
@@ -53,7 +53,7 @@ const MENU = [
     id: "custom-event",
     category: "specials",
     name: "Pesan untuk acara khusus",
-    description: "Menu dan rasa istimewa untuk acara yang spesial.",
+    description: "Anda dapat memesan dalam jumlah banyak atau bulk order, kami siap memenuhi kebutuhan acara spesial anda",
     prices: [
 
     ],
@@ -68,5 +68,5 @@ const CATEGORIES = [
   { id: "all", label: "All" },
   { id: "classic", label: "Klasik" },
   { id: "green", label: "Green Tea" },
-  { id: "specials", label: "Spesial" },
+  { id: "roastedMilkTea", label: "Roasted Milk Tea" },
 ];
