@@ -120,9 +120,6 @@
       '" alt="' +
       escapeHtml(item.name) +
       '" loading="lazy" width="400" height="300" onerror="this.style.display=\'none\'" />' +
-      '<span class="placeholder-label" aria-hidden="true">' +
-      escapeHtml(item.name.charAt(0)) +
-      "</span>" +
       "</div>" +
       '<div class="menu-card-body">' +
       "<h3>" +
