@@ -96,7 +96,7 @@
     return html;
   }
 
-  function renderCard(item) {
+  function renderCard(item, index) {
     var soldOut = !item.available;
     var orderHref = soldOut ? "#" : whatsappUrl(drinkOrderMessage(item));
     var actionHtml = soldOut
@@ -110,6 +110,8 @@
       (soldOut ? " is-sold-out" : "") +
       '" data-category="' +
       escapeHtml(item.category) +
+      '" style="--i: ' +
+      (index || 0) +
       '">' +
       '<div class="menu-card-image">' +
       '<div class="card-tags">' +
@@ -179,7 +181,7 @@
 
     var html = "";
     for (var i = 0; i < items.length; i++) {
-      html += renderCard(items[i]);
+      html += renderCard(items[i], i);
     }
     grid.innerHTML = html;
   }
@@ -365,12 +367,36 @@
     script.textContent = JSON.stringify(data, null, 2);
   }
 
+  function setupStepsReveal() {
+    var steps = document.querySelector(".steps");
+    if (!steps || !("IntersectionObserver" in window)) {
+      if (steps) steps.classList.add("is-visible");
+      return;
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        for (var i = 0; i < entries.length; i++) {
+          if (!entries[i].isIntersecting) continue;
+          steps.classList.add("is-visible");
+          observer.disconnect();
+          break;
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(steps);
+  }
+
   function init() {
+    document.documentElement.classList.add("js-motion");
     fillStaticContent();
     updateJsonLd();
     renderFilters("all");
     renderMenu("all");
     setupFilters();
+    setupStepsReveal();
   }
 
   if (document.readyState === "loading") {

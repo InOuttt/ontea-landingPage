@@ -11,3 +11,4 @@ Desktop.ini
 .idea/
 .vscode/
 *.log
+.agents
