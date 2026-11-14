@@ -39,4 +39,11 @@ const CONFIG = {
     areas: ["Malang Kota", "Sawojajar", "Blimbing", "Klojen", "Lowokwaru", "Kedungkandang ", "Sukun", 
       "Karang Ploso", "Tidar", "Tlogomas", "Turen", "Singosari", "Tumpang", "Pakis"],
   },
+
+  cart: {
+    enforceMinimum: false,
+    quickNotes: ["Less sugar", "Less ice"],
+    /** Hour (0–23, WIB) after which earliest delivery date becomes H+2. */
+    cutoffHour: 20,
+  },
 };

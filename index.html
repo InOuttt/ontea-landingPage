@@ -44,6 +44,7 @@
   </head>
   <body>
     <a class="sr-only" href="#menu">Lewati ke menu</a>
+    <div id="cart-live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 
     <header class="site-header">
       <div class="container">
@@ -56,15 +57,20 @@
           <a href="#delivery">Pengiriman</a>
           <a href="#contact">Kontak Kami</a>
         </nav>
-        <a
-          class="btn btn-primary btn-sm header-cta"
-          id="header-whatsapp"
-          href="#"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Pesan lewat WhatsApp
-        </a>
+        <div class="header-actions">
+          <button
+            type="button"
+            class="header-cart"
+            id="header-cart"
+            aria-label="Buka keranjang"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+              <path fill="currentColor" d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM3.2 4h1.6l.3 1.2L6.8 14H19a1 1 0 0 0 .96-.73l2-7A1 1 0 0 0 21 5H6.1l-.3-1.2A1 1 0 0 0 4.8 3H3a1 1 0 0 0 0 2h.2zm4.1 8 .8-3h10.3l-1.15 4H7.3z"/>
+            </svg>
+            <span class="header-cart-badge" id="cart-header-badge" hidden>0</span>
+          </button>
+         
+        </div>
       </div>
     </header>
 
@@ -99,21 +105,21 @@
           <ol class="steps">
             <li class="step">
               <span class="step-num" aria-hidden="true">1</span>
-              <h3>Lihat menu</h3>
-              <p>Pilih varian dan jumlah yang akan anda pesan.</p>
+              <h3>Pilih minuman</h3>
+              <p>Pilih ukuran, tambahkan ke keranjang, dan tulis catatan per item jika perlu.</p>
             </li>
             <li class="step">
               <span class="step-num" aria-hidden="true">2</span>
-              <h3>Kirim pesanan anda lewat WhatsApp chat</h3>
+              <h3>Isi detail pengiriman</h3>
               <p>
-                Tap tombol “Pesan ini", anda akan otomatis dialihkan ke applikasi WhatsApp. 
+                Buka keranjang, lengkapi nama, tanggal kirim, dan alamat.
               </p>
             </li>
             <li class="step">
               <span class="step-num" aria-hidden="true">3</span>
-              <h3>Periksa kembali pesanan anda</h3>
+              <h3>Kirim lewat WhatsApp</h3>
               <p>
-                Lengkapi informasi seperti alamat dan titik koordinat.
+                Tap “Kirim via WhatsApp” — pesanan terisi otomatis di chat.
               </p>
             </li>
             <li class="step">
@@ -233,8 +239,145 @@
       </div>
     </footer>
 
+    <!-- Floating cart bar -->
+    <button
+      type="button"
+      class="cart-bar"
+      id="cart-bar"
+      hidden
+      aria-label="Buka keranjang"
+    >
+      <span class="cart-bar-count is-bump" id="cart-bar-count">0</span>
+      <span class="cart-bar-label">Lihat keranjang</span>
+      <span class="cart-bar-total" id="cart-bar-total">Rp 0</span>
+    </button>
+
+    <!-- Cart backdrop + drawer -->
+    <div class="cart-backdrop" id="cart-backdrop" hidden></div>
+    <aside
+      class="cart-drawer"
+      id="cart-drawer"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cart-drawer-title"
+      aria-hidden="true"
+      hidden
+    >
+      <div class="cart-drawer-header">
+        <h2 id="cart-drawer-title">Keranjang</h2>
+        <button
+          type="button"
+          class="cart-drawer-close"
+          id="cart-drawer-close"
+          aria-label="Tutup keranjang"
+        >
+          ×
+        </button>
+      </div>
+
+      <div class="cart-drawer-body">
+        <div class="cart-lines" id="cart-lines">
+          <!-- Filled by main.js -->
+        </div>
+
+        <div class="cart-totals">
+          <div class="cart-total-row">
+            <span>Subtotal</span>
+            <span id="cart-subtotal">Rp 0</span>
+          </div>
+          <div class="cart-total-row">
+            <span>Ongkir</span>
+            <span id="cart-fee">Rp 0</span>
+          </div>
+          <div class="cart-total-row cart-total-row-grand">
+            <span>Total</span>
+            <span id="cart-total">Rp 0</span>
+          </div>
+          <div class="cart-min-progress" id="cart-min-progress" hidden>
+            <div class="cart-min-track">
+              <div
+                class="cart-min-bar"
+                id="cart-min-bar"
+                role="progressbar"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+              ></div>
+            </div>
+            <p class="cart-min-text" id="cart-min-text"></p>
+          </div>
+        </div>
+
+        <form class="checkout-form" id="checkout-form" novalidate>
+          <h3 class="checkout-heading">Detail pengiriman</h3>
+
+          <div class="form-field">
+            <label for="checkout-name">Nama <span aria-hidden="true">*</span></label>
+            <input
+              type="text"
+              id="checkout-name"
+              name="name"
+              autocomplete="name"
+              required
+              placeholder="Nama penerima"
+            />
+            <p class="field-error" id="checkout-name-error" hidden></p>
+          </div>
+
+          <div class="form-field">
+            <label for="checkout-date">Tanggal kirim <span aria-hidden="true">*</span></label>
+            <input type="date" id="checkout-date" name="date" required />
+            <p class="field-error" id="checkout-date-error" hidden></p>
+          </div>
+
+          <div class="form-field">
+            <label for="checkout-address">Alamat <span aria-hidden="true">*</span></label>
+            <textarea
+              id="checkout-address"
+              name="address"
+              rows="3"
+              required
+              placeholder="Alamat lengkap pengiriman"
+            ></textarea>
+            <p class="field-error" id="checkout-address-error" hidden></p>
+          </div>
+
+          <div class="form-field">
+            <label for="checkout-maps">Link Google Maps <span class="optional">(opsional)</span></label>
+            <input
+              type="url"
+              id="checkout-maps"
+              name="maps"
+              inputmode="url"
+              placeholder="https://maps.google.com/..."
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="checkout-note">Catatan umum <span class="optional">(opsional)</span></label>
+            <textarea
+              id="checkout-note"
+              name="note"
+              rows="2"
+              placeholder="Catatan untuk pengiriman"
+            ></textarea>
+          </div>
+        </form>
+      </div>
+
+      <div class="cart-drawer-footer">
+        <button type="submit" form="checkout-form" class="btn btn-primary btn-block" id="cart-checkout">
+          Kirim via WhatsApp
+        </button>
+      </div>
+    </aside>
+
+    <!-- Undo toast -->
+    <div class="cart-toast" id="cart-toast" hidden role="status"></div>
+
     <script src="assets/js/config.js"></script>
     <script src="assets/js/menu-data.js"></script>
+    <script src="assets/js/cart.js"></script>
     <script src="assets/js/main.js"></script>
   </body>
 </html>
